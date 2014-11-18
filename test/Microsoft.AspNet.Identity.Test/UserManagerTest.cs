@@ -782,12 +782,12 @@ namespace Microsoft.AspNet.Identity.Test
                 return Task.FromResult<TestUser>(null);
             }
 
-            public Task<DateTimeOffset> GetLockoutEndDateAsync(TestUser user, CancellationToken cancellationToken = default(CancellationToken))
+            public Task<DateTimeOffset?> GetLockoutEndDateAsync(TestUser user, CancellationToken cancellationToken = default(CancellationToken))
             {
-                return Task.FromResult(DateTimeOffset.MinValue);
+                return Task.FromResult<DateTimeOffset?>(DateTimeOffset.MinValue);
             }
 
-            public Task SetLockoutEndDateAsync(TestUser user, DateTimeOffset lockoutEnd, CancellationToken cancellationToken = default(CancellationToken))
+            public Task SetLockoutEndDateAsync(TestUser user, DateTimeOffset? lockoutEnd, CancellationToken cancellationToken = default(CancellationToken))
             {
                 return Task.FromResult(0);
             }
@@ -1048,12 +1048,12 @@ namespace Microsoft.AspNet.Identity.Test
                 throw new NotImplementedException();
             }
 
-            public Task<DateTimeOffset> GetLockoutEndDateAsync(TestUser user, CancellationToken cancellationToken = default(CancellationToken))
+            public Task<DateTimeOffset?> GetLockoutEndDateAsync(TestUser user, CancellationToken cancellationToken = default(CancellationToken))
             {
                 throw new NotImplementedException();
             }
 
-            public Task SetLockoutEndDateAsync(TestUser user, DateTimeOffset lockoutEnd, CancellationToken cancellationToken = default(CancellationToken))
+            public Task SetLockoutEndDateAsync(TestUser user, DateTimeOffset? lockoutEnd, CancellationToken cancellationToken = default(CancellationToken))
             {
                 throw new NotImplementedException();
             }

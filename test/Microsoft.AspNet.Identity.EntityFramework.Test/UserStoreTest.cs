@@ -311,6 +311,25 @@ namespace Microsoft.AspNet.Identity.EntityFramework.Test
             Assert.Equal(0, roles.Count());
         }
 
+        [Fact]
+        public async Task NullableDateTimeOperationTest()
+        {
+            var context = CreateTestContext();
+            var userMgr = CreateManager(context);
+            var user = new IdentityUser("foo" + new Random().Next()) { LockoutEnabled = true };
+            IdentityResultAssert.IsSuccess(await userMgr.CreateAsync(user));
+
+            Assert.Null(await userMgr.GetLockoutEndDateAsync(user));
+
+            // set LockoutDateEndDate to null
+            await userMgr.SetLockoutEndDateAsync(user, null);
+            Assert.Null(await userMgr.GetLockoutEndDateAsync(user));
+
+            // set to a valid value
+            await userMgr.SetLockoutEndDateAsync(user, DateTimeOffset.Parse("01/01/2014"));
+            Assert.Equal(DateTimeOffset.Parse("01/01/2014"), await userMgr.GetLockoutEndDateAsync(user));
+        }
+
         // TODO: cascading deletes?  navigation properties not working
         //[Fact]
         //public async Task DeleteUserRemovesFromRoleTest()
